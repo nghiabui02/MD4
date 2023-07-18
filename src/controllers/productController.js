@@ -60,6 +60,7 @@ class ProductController {
                 })
             } else {
                 data = qs.parse(data);
+
                 productService.update(data).then(() => {
                     res.writeHead(301, {'location': 'api/product'})
                     res.end()
