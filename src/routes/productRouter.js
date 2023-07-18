@@ -5,7 +5,7 @@ const productRouter = Router();
 productRouter.get('', productController.findAll);
 productRouter.post('', productController.add);
 productRouter.get('/add', productController.showAddForm);
-productRouter.get('/edit', productController.delete);
-productRouter.get('/add', productController.edit);
+productRouter.get('/delete', productController.delete);
+productRouter.get('/update', productController.edit);
 
 export default productRouter;

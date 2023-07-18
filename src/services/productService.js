@@ -19,7 +19,7 @@ class ProductService {
 
     save(product) {
         return new Promise((resolve, reject) => {
-            db.query(`insert into product values (${product.id}, '${product.name}', ${product.price}, ${product.quantity}, ${product.image});`, (err, data) => {
+            db.query(`insert into product values (${product.id}, '${product.name}', ${product.price}, ${product.quantity});`, (err, data) => {
                 if (err) {
                     reject(err)
                 } else {

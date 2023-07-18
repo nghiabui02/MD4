@@ -12,7 +12,13 @@ class ProductController {
             let str = '';
             productService.findAll().then((products) => {
                 for (const item of products) {
-                    str += `<h1>${item.name}, ${item.price}</h1>`;
+                    str += `<h1>${item.name}, ${item.price}, ${item.quantity}</h1>
+<button><a onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"
+                             href="/delete-product?idDelete=${item.id}">Delete
+                                    </a></button> <button><a
+                             href="/edit-product?idEdit=${item.id}">Edit
+                                    </a></button>
+                 `;
                 }
                 stringHTML = stringHTML.replace('{list}', str)
                 res.write(stringHTML);
@@ -26,7 +32,6 @@ class ProductController {
             res.write(stringHTML);
             res.end();
         })
-
     }
     add(req, res) {
         productService.save(req.body).then(() => {
@@ -47,8 +52,8 @@ class ProductController {
                     productService.findById(urlObject.query.idEdit).then((product) => {
                         stringHTML = stringHTML.replace('{id}', product.id);
                         stringHTML = stringHTML.replace('{name}', product.name);
-                        stringHTML = stringHTML.replace('{age}', product.price);
-                        stringHTML = stringHTML.replace('{height}', product.quantity);
+                        stringHTML = stringHTML.replace('{price}', product.price);
+                        stringHTML = stringHTML.replace('{quantity}', product.quantity);
                         res.write(stringHTML);
                         res.end();
                     });
@@ -56,7 +61,7 @@ class ProductController {
             } else {
                 data = qs.parse(data);
                 productService.update(data).then(() => {
-                    res.writeHead(301, {'location': '/product'})
+                    res.writeHead(301, {'location': 'api/product'})
                     res.end()
                 });
             }
@@ -65,8 +70,8 @@ class ProductController {
     delete(req, res) {
         if (req.method === 'GET') {
             let urlObject = url.parse(req.url, true);
-            productService.delete(urlObject.query.idDelete).then(() => {
-                res.writeHead(301, {'location': '/products'})
+            productService.delete(req.body).then(() => {
+                res.writeHead(301, {'location': 'api/products'})
                 res.end()
             })
         }
