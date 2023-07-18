@@ -8,9 +8,15 @@
 <h2>Edit bike</h2>
 <form action="/edit-bike" method="post">
     <input type="hidden" name="id" value="{id}">
-    <input type="text" name="name" value="{name}">
-    <input type="text" name="numberControl" value="{price}">
-    <input type="text" name="cc" value="{quantity}">
+    <label>
+        <input type="text" name="name" value="{name}">
+    </label>
+    <label>
+        <input type="text" name="price" value="{price}">
+    </label>
+    <label>
+        <input type="text" name="quantity" value="{quantity}">
+    </label>
     <button>Save</button>
 </form>
 
